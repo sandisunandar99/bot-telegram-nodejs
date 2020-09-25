@@ -1,0 +1,31 @@
+{
+  "name": "bot-telegram-nodejs",
+  "version": "1.0.0",
+  "description": "telegram bot untuk tiketing OPS",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "npm-run-all --parallel start:server",
+    "start:server": "nodemon --max-old-space-size=2048 --legacy-watch index.js"
+  },
+  "author": "sandi sunandar",
+  "license": "ISC",
+  "dependencies": {
+    "debug": "^4.2.0",
+    "dotenv": "^8.2.0",
+    "telegraf": "^3.38.0",
+    "telegraf-router": "^1.0.7",
+    "mongoose": "^5.9.20",
+    "mongoose-paginate-v2": "^1.3.9",
+    "mongoose-unique-validator": "^2.0.3"
+  },
+  "devDependencies": {
+    "eslint-config-standard": "^14.1.1",
+    "eslint-plugin-import": "^2.22.0",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-promise": "^4.2.1",
+    "eslint-plugin-standard": "^4.0.1",
+    "nodemon": "^1.11.0",
+    "npm-run-all": "^4.0.2"
+  }
+}

@@ -1,0 +1,63 @@
+version: '3'
+
+services:
+  mongo:
+    container_name: bot_mongodb
+    image: ${I_DATABASE}
+    # environment:
+    #   MONGO_INITDB_ROOT_USERNAME: ${MONGO_INITDB_ROOT_USERNAME}
+    #   MONGO_INITDB_ROOT_PASSWORD: ${MONGO_INITDB_ROOT_PASSWORD}
+    ports:
+      - "27017:27017"
+    restart: always
+    volumes:
+        - mongodb:/data/db
+        - mongodb_config:/data/configdb
+    networks:
+      - bot-telegram-nodejs
+
+  mongo-express:
+    container_name: bot_mongo_express
+    image: ${I_MNG_DATABASE}
+    ports:
+        - 8081:8081
+    environment:
+        ME_CONFIG_BASICAUTH_USERNAME: ${ME_CONFIG_BASICAUTH_USERNAME}
+        ME_CONFIG_BASICAUTH_PASSWORD: ${ME_CONFIG_BASICAUTH_PASSWORD}
+        # ME_CONFIG_MONGODB_PORT: ${ME_CONFIG_MONGODB_PORT}
+        # ME_CONFIG_MONGODB_ADMINUSERNAME: ${ME_CONFIG_MONGODB_ADMINUSERNAME}
+        # ME_CONFIG_MONGODB_ADMINPASSWORD: ${ME_CONFIG_MONGODB_ADMINPASSWORD}
+    links:
+        - mongo
+    restart: always
+    networks:
+        - bot-telegram-nodejs
+
+  bot:
+    container_name: bot_
+    image: ${I_API}
+    build:
+        context: .
+        dockerfile: Dockerfile
+    volumes:
+        - .:/app
+        - /app/node_modules
+    # ports:
+    #     - 3000:3000
+    links:
+        - mongo
+    restart: always
+    depends_on:
+        - mongo
+    environment:
+        MONGODB_URI: ${MONGO_DB_URI}
+    networks:
+        - bot-telegram-nodejs
+
+volumes:
+    mongodb:
+    mongodb_config:
+
+networks:
+    bot-telegram-nodejs:
+      driver: bridge
