@@ -7,7 +7,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "npm-run-all --parallel lint start:server",
     "start:server": "nodemon --max-old-space-size=2048 --legacy-watch index.js",
-    "lint": "eslint . --ext .js"
+    "lint": "eslint --fix --ext .js,.jsx ."
   },
   "author": "sandi sunandar",
   "license": "ISC",
