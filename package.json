@@ -12,6 +12,7 @@
   "author": "sandi sunandar",
   "license": "ISC",
   "dependencies": {
+    "bluebird": "^3.7.2",
     "debug": "^4.2.0",
     "dotenv": "^8.2.0",
     "mongoose": "^5.9.20",
