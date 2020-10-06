@@ -1,20 +1,29 @@
-
 const index = [
   {
     path: 'start',
     action: async function StartScene ({ ctx, params, router }) {
-      await ctx.reply(' selamat datang ', {
-        reply_markup: {
-          remove_keyboard: false,
-          inline_keyboard: [
-            [{ text: 'Register', callback_data: 'redirect:/form/register' }],
-            [{ text: 'Lapor Tiket', callback_data: 'redirect:form/tiket' }]
-          ]
-        }
-      })
-      console.log('sssssssssssssss')
+      await router.redirect('select-action', ctx)
       return true
     }
+  },
+  {
+    path: 'select-action',
+    children: [
+      {
+        path: '',
+        action: async function StartScene ({ ctx, params, router }) {
+          await ctx.reply('Please select action:', {
+            reply_markup: {
+              remove_keyboard: true,
+              inline_keyboard: [
+                [{ text: 'Register', callback_data: 'redirect:/form/register' }]
+              ]
+            }
+          })
+          return true
+        }
+      }
+    ]
   }
 ]
 
