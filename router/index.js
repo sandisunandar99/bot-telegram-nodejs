@@ -12,14 +12,8 @@ const index = [
       {
         path: '',
         action: async function StartScene ({ ctx, params, router }) {
-          await ctx.reply('Please select action:', {
-            reply_markup: {
-              remove_keyboard: true,
-              inline_keyboard: [
-                [{ text: 'Register', callback_data: 'redirect:/form/register' }]
-              ]
-            }
-          })
+          await ctx.reply('Selamat datang..')
+          await router.redirect('check-register', ctx)
           return true
         }
       }
