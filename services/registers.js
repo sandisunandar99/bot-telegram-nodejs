@@ -1,4 +1,15 @@
+
 const { User } = require('../models')
+
+const checkRegistered = async (from) => {
+  try {
+    const useId = from.id
+    const user = await User.findOne({ user_id: useId })
+    return { status: 'success', data: user }
+  } catch (error) {
+    return { status: 'error', error }
+  }
+}
 
 const registerUser = async (from, text) => {
   try {
@@ -16,5 +27,6 @@ const registerUser = async (from, text) => {
 }
 
 module.exports = {
+  checkRegistered,
   registerUser
 }
